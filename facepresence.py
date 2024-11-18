@@ -47,7 +47,7 @@ def recognize_face(testpic):
     
     res = []
     for encode_face, faceloc in zip(picencode, face_locs):
-        matches = face_recognition.compare_faces(encoded_face_train, encode_face)
+        matches = face_recognition.compare_faces(encoded_face_train, encode_face, tolerance=6.5)
         faceDist = face_recognition.face_distance(encoded_face_train, encode_face)
         matchIndex = np.argmin(faceDist)
         if matches[matchIndex]:

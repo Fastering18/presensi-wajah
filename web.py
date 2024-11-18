@@ -29,13 +29,28 @@ def upload_image():
     </html>
     <body>
     <h1>Presensi wajah</h1>
+    <hr>
     <p>upload foto</p>
     <form method="POST" enctype="multipart/form-data">
-      <input type="file" name="file">
+      <input type="file" name="file" accept="image/*">
       <input type="submit" value="Upload">
     </form>
+    <script>
+    const input = document.querySelector("input");
+
+    function updateImageDisplay() {
+        let file = input.files[0]
+        if (!file) return;
+
+        let image = document.createElement("img");
+        image.src = URL.createObjectURL(file);
+        image.alt = image.title = file.name;
+        document.appendChild(image);
+    }
+    input.addEventListener("change", updateImageDisplay);
+    </script>
     </body>
     '''
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+#if __name__ == "__main__":
+#    app.run(host='0.0.0.0', port=8000)
