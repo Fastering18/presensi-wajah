@@ -8,6 +8,8 @@ RUN apt-get install -y build-essential cmake
 # for opencv
 RUN apt-get install -y libopencv-dev
 
+RUN pip install dlib -vvv
+
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 

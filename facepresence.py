@@ -44,12 +44,12 @@ else:
 def recognize_face(testpic):
     face_locs = face_recognition.face_locations(testpic)
     picencode = face_recognition.face_encodings(testpic, face_locs)
-    matches = face_recognition.compare_faces(encoded_face_train, picencode)
-    faceDist = face_recognition.face_distance(encoded_face_train, picencode)
-    matchIndex = np.argmin(faceDist)
-
+    
     res = []
     for encode_face, faceloc in zip(picencode, face_locs):
+        matches = face_recognition.compare_faces(encoded_face_train, encode_face)
+        faceDist = face_recognition.face_distance(encoded_face_train, encode_face)
+        matchIndex = np.argmin(faceDist)
         if matches[matchIndex]:
             name = classNames[matchIndex].upper().lower()
             res.append({'id': int(matchIndex), 'nama': name, 'lokasi': faceloc})
