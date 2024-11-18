@@ -40,15 +40,18 @@ if os.path.isfile(file_encoded+".npz"):
 else:
     encoded_face_train = findEncodings(images)
 
-testpic = face_recognition.load_image_file("dataset_meme/bu_elok.jpg")
-picencode = face_recognition.face_encodings(testpic)[0]
-matches = face_recognition.compare_faces(encoded_face_train, picencode)
-faceDist = face_recognition.face_distance(encoded_face_train, picencode)
-matchIndex = np.argmin(faceDist)
-print(matchIndex)
-if matches[matchIndex]:
-    name = classNames[matchIndex].upper().lower()
-    print(name)
+# testpic as fc.load_image_file
+def recognize_face(testpic):
+    face_locs = face_recognition.face_locations(testpic)
+    picencode = face_recognition.face_encodings(testpic, face_locs)
+    matches = face_recognition.compare_faces(encoded_face_train, picencode)
+    faceDist = face_recognition.face_distance(encoded_face_train, picencode)
+    matchIndex = np.argmin(faceDist)
 
-np.savez_compressed(file_encoded, data=encoded_face_train)
-print(f"tersave {file_encoded}.npz")
+    res = []
+    for encode_face, faceloc in zip(picencode, face_locs):
+        if matches[matchIndex]:
+            name = classNames[matchIndex].upper().lower()
+            res.append({'id': int(matchIndex), 'nama': name, 'lokasi': faceloc})
+    
+    return res
