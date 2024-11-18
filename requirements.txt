@@ -1,4 +1,4 @@
 flask
 face_recognition
-cv2
+opencv-python
 numpy
