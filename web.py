@@ -88,9 +88,10 @@ def index():
             ctx.strokeStyle = "red";
             ctx.rect(x1, y1, (x2-x1), (y2-y1));
             ctx.stroke();
-            ctx.font = "bold 30px Arial";
+            ctx.font = "bold 40px Arial";
             //ctx.strokeStyle = "black";
-            ctx.fillText(data.found[i].nama, x1, y2+25);
+            ctx.fillStyle = "white";
+            ctx.fillText(data.found[i].nama, x1, y2+20,500);
             console.log(x1, y1, (x2-x1), (y2-y1))
             }
         })
