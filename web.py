@@ -89,6 +89,7 @@ def index():
             ctx.rect(x1, y1, (x2-x1), (y2-y1));
             ctx.stroke();
             ctx.font = "bold 30px Arial";
+            ctx.strokeStyle = "black";
             ctx.strokeText(data.found[i].nama, x1+6, y2+20);
             console.log(x1, y1, (x2-x1), (y2-y1))
             }
